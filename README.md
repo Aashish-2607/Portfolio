@@ -2,7 +2,7 @@
 
 Hi there! I'm **Aashish Kumar**, an aspiring Data Scientist and B.Tech CSE student at Lovely Professional University. This is my personal portfolio website built with a focus on modern design, high performance, and interactivity.
 
-🌐 **Live Link:** [portfolio-kby5.vercel.app](https://portfolio-kby5.vercel.app/)
+🌐 **Live Link:** (https://aashish-portfolio-one.vercel.app/)
 
 ---
 
