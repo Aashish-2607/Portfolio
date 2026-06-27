@@ -181,7 +181,7 @@ export default function Portfolio() {
     { name: "Python", level: 90 },
     { name: "React.js / Next.js", level: 85 },
     { name: "SQL", level: 80 },
-    { name: "Machine Learning", level: 25 },
+    { name: "Machine Learning", level: 35 },
     { name: "Tailwind CSS", level: 95 },
     { name: "C Programming", level: 70 },
     { name: "JavaScript", level: 80 },
@@ -270,6 +270,7 @@ export default function Portfolio() {
               <CertCard org="Infosys" title="Cyber Security Essentials" year="2026" isHackathon={false} fileName="infosys_springboard.pdf" />
               <CertCard org="upGrad" title="Advanced Power BI" year="2025" isHackathon={false} fileName="PowerBI.pdf" />
               <CertCard org="Publicis Sapient" title="JavaScript Essentials" year="2025" isHackathon={false} fileName="JS.pdf" />
+              <CertCard org="IBM" title="Agentic AI and AI Tools" year="2026" isHackathon={false} fileName="Agentic_AI.pdf" />
             </div>
           </div>
         </section>
