@@ -208,7 +208,7 @@ export default function Portfolio() {
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={50} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-purple-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Projects</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={5} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Certs</p></div>
-          </div>m
+          </div>
         </section>
 
         {/* ABOUT ME & TECHNICAL ARSENAL */}
