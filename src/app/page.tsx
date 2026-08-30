@@ -163,7 +163,7 @@ export default function Portfolio() {
   }, [fullBio]);
 
   const journeyData = [
-    { year: "2026 - Upcoming", title: "Summer Internship", subtitle: "Looking for Opportunities", desc: "Actively seeking Data Scientist or software engineering internship for Summer 2026." },
+    { year: "Jun 2026 - Aug 2026", title: "Summer Internship", subtitle: "Times OF India", desc: "Explored and completed the Community Development Project On Critical Thinking in collaboration with TOI" },
     { year: "2025 - Present", title: "B.Tech in Computer Science", subtitle: "Lovely Professional University , Jalandhar", desc: "Core subjects: Programming, Math, Physics. CGPA: 8.79." },
     { year: "2024 - 2025", title: "Senior Secondary (12th)", subtitle: "KV,ARC,Charbatia,Cuttack,Odisha", desc: "PCM Stream. Explored interest in programming." },
     { year: "2022 - 2023", title: "Class 10th", subtitle: "KV,ARC,Charbatia,Cuttack,Odisha", desc: "Engaged in many projects and programs." }
@@ -173,7 +173,7 @@ export default function Portfolio() {
     { title: "Cosmic Tic-Tac-Toe", desc: "Space-themed strategy game with framer-motion transitions.", tech: ["React", "Vite", "Framer"], link: "https://tic-tac-toe-eight-navy-77.vercel.app/", status: "Live" },
     { title: "Calculux", desc: "Modern scientific calculator with high-precision logic.", tech: ["HTML", "CSS", "JS"], link: "https://working-scientific-calc-i47e.vercel.app/", status: "Live" },
     { title: "StudyPilot AI", desc: "AI study companion that analyzes learning patterns.", tech: ["Next.js", "Python", "OpenAI"], status: "Completed" },
-    { title: "FinSage", desc: "Automated financial ecosystem for expense tracking.", tech: ["Next.js", "Supabase", "Tailwind"], status: "In Development" },
+    { title: "FinSage", desc: "Automated financial ecosystem for expense tracking.", tech: ["Python", "SQLite", "StreamLit"], link: "https://finsage-26.streamlit.app/, status: "Live" },
     { title: "UniPath AI", desc: "ML-driven career mapping platform that analyzes skill gaps.", tech: ["Flask", "SQLAlchemy", "Scikit"], status: "In Development" }
   ];
 
@@ -181,11 +181,11 @@ export default function Portfolio() {
     { name: "Python", level: 90 },
     { name: "React.js / Next.js", level: 85 },
     { name: "SQL", level: 80 },
-    { name: "Machine Learning", level: 35 },
+    { name: "Machine Learning", level: 45 },
     { name: "Tailwind CSS", level: 95 },
     { name: "C Programming", level: 70 },
     { name: "JavaScript", level: 80 },
-    { name: "Java", level: 0 },
+    { name: "Java", level: 35 },
     { name: "HTML", level: 85 }
   ];
 
@@ -205,7 +205,7 @@ export default function Portfolio() {
             <h1 className="text-6xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-[0.8] uppercase">AASHISH<br/><span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.43)' }}>KUMAR</span></h1>
           </div>
           <div className="flex gap-16 border-l border-white/5 pl-8">
-            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={50} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
+            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={75} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-purple-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Projects</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={5} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Certs</p></div>
           </div>
