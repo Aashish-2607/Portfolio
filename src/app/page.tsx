@@ -163,19 +163,67 @@ export default function Portfolio() {
   }, [fullBio]);
 
   const journeyData = [
-    { year: "2026 - Upcoming", title: "Summer Internship", subtitle: "Looking for Opportunities", desc: "Actively seeking Data Scientist or software engineering internship for Summer 2026." },
-    { year: "2025 - Present", title: "B.Tech in Computer Science", subtitle: "Lovely Professional University , Jalandhar", desc: "Core subjects: Programming, Math, Physics. CGPA: 8.79." },
-    { year: "2024 - 2025", title: "Senior Secondary (12th)", subtitle: "KV,ARC,Charbatia,Cuttack,Odisha", desc: "PCM Stream. Explored interest in programming." },
-    { year: "2022 - 2023", title: "Class 10th", subtitle: "KV,ARC,Charbatia,Cuttack,Odisha", desc: "Engaged in many projects and programs." }
-  ];
+  {
+    year: "Jun 2026 - Aug 2026",
+    title: "Community Development Project",
+    subtitle: "Times of India",
+    desc: "Explored and completed Community Development Project on Critical Thinking in collaboration with TOI."
+  },
+  {
+    year: "2025 - Present",
+    title: "B.Tech in Computer Science",
+    subtitle: "Lovely Professional University , Jalandhar",
+    desc: "Core subjects: Programming, Math, Physics. CGPA: 8.08."
+  },
+  {
+    year: "2024 - 2025",
+    title: "Senior Secondary (12th)",
+    subtitle: "KV,ARC,Charbatia,Cuttack,Odisha",
+    desc: "PCM Stream. Explored interest in programming."
+  },
+  {
+    year: "2022 - 2023",
+    title: "Class 10th",
+    subtitle: "KV,ARC,Charbatia,Cuttack,Odisha",
+    desc: "Engaged in many projects and programs."
+  }
+];
 
   const projects = [
-    { title: "Cosmic Tic-Tac-Toe", desc: "Space-themed strategy game with framer-motion transitions.", tech: ["React", "Vite", "Framer"], link: "https://tic-tac-toe-eight-navy-77.vercel.app/", status: "Live" },
-    { title: "Calculux", desc: "Modern scientific calculator with high-precision logic.", tech: ["HTML", "CSS", "JS"], link: "https://working-scientific-calc-i47e.vercel.app/", status: "Live" },
-    { title: "StudyPilot AI", desc: "AI study companion that analyzes learning patterns.", tech: ["Next.js", "Python", "OpenAI"], status: "Completed" },
-    { title: "FinSage", desc: "Automated financial ecosystem for expense tracking.", tech: ["Next.js", "Supabase", "Tailwind"], status: "In Development" },
-    { title: "UniPath AI", desc: "ML-driven career mapping platform that analyzes skill gaps.", tech: ["Flask", "SQLAlchemy", "Scikit"], status: "In Development" }
-  ];
+  {
+    title: "Cosmic Tic-Tac-Toe",
+    desc: "Problem: Traditional Tic-Tac-Toe can feel repetitive and visually plain. Result: Built an interactive space-themed Tic-Tac-Toe game with animated transitions and an engaging interface. Learning: Improved my understanding of React components, state management and animation-driven UI design.",
+    tech: ["React", "Vite", "Framer"],
+    link: "https://tic-tac-toe-eight-navy-77.vercel.app/",
+    status: "Live"
+  },
+  {
+    title: "Calculux",
+    desc: "Problem: Basic calculators often lack advanced scientific functions and a modern user experience. Result: Developed a scientific calculator with high-precision calculations and an intuitive interface. Learning: Strengthened my understanding of JavaScript logic, mathematical operations and responsive web design.",
+    tech: ["HTML", "CSS", "JS"],
+    link: "https://working-scientific-calc-i47e.vercel.app/",
+    status: "Live"
+  },
+  {
+    title: "StudyPilot AI",
+    desc: "Problem: Students often struggle to understand their learning patterns and study effectively. Result: Built an AI-powered study companion that analyzes learning patterns and provides personalized assistance. Learning: Gained experience in AI integration, full-stack development and building intelligent user-focused applications.",
+    tech: ["Next.js", "Python", "OpenAI"],
+    status: "Completed"
+  },
+  {
+    title: "FinSage",
+    desc: "Problem: Managing and understanding personal expenses can be difficult when financial data is scattered and unstructured. Result: Developed a financial tracking application that organizes expenses and transforms financial data into useful insights. Learning: Improved my skills in data processing, database management and building practical data-driven applications.",
+    tech: ["Python", "SQLite", "Streamlit"],
+    link: "https://finsage-26.streamlit.app/",
+    status: "Live"
+  },
+  {
+    title: "AutoInsight",
+    desc: "Problem: Extracting meaningful insights from raw datasets can be time-consuming and technically challenging. Result: Built an AI-powered analytics platform that automatically identifies key insights, trends and actionable findings from data. Learning: Strengthened my understanding of automated data analysis, machine learning workflows and interactive analytics applications.",
+    tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Streamlit"],
+    status: "In Development"
+  }
+];
 
   const arsenalSkills = [
     { name: "Python", level: 90 },
@@ -207,7 +255,7 @@ export default function Portfolio() {
           <div className="flex gap-16 border-l border-white/5 pl-8">
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={75} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-purple-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Projects</p></div>
-            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={5} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Certs</p></div>
+            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Certs</p></div>
           </div>
         </section>
 
@@ -270,6 +318,8 @@ export default function Portfolio() {
               <CertCard org="Infosys" title="Cyber Security Essentials" year="2026" isHackathon={false} fileName="infosys_springboard.pdf" />
               <CertCard org="upGrad" title="Advanced Power BI" year="2025" isHackathon={false} fileName="PowerBI.pdf" />
               <CertCard org="Publicis Sapient" title="JavaScript Essentials" year="2025" isHackathon={false} fileName="JS.pdf" />
+              <CertCard org="IBM" title="Agentic AI and AI Tools" year="2026" isHackathon={false} fileName="Agentic_AI.pdf" />
+              <CertCard org="Google" title="AI Fundamentals" year="2026" isHackathon={false} fileName="AI_fundamentals.pdf" />
             </div>
           </div>
         </section>
