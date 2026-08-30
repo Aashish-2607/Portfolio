@@ -4,18 +4,35 @@ import { motion, useInView, animate } from 'framer-motion';
 
 // --- 1. REALISTIC BLUE FLAME ENGINE ---
 const BlueFlameBackground = () => {
-  const canvasRef = useRef(null);
+  // TypeScript null safety added
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return; // Fixes the "possibly null" build error
+
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationFrameId;
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    if (!ctx) return;
+
+    let particles: any[] = [];
+    let animationFrameId: number;
+
+    const resize = () => {
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    };
+
     class FlameParticle {
-      constructor() { this.reset(); }
+      x: number; y: number; size: number; speedY: number; speedX: number; life: number; decay: number; color: string;
+      constructor() {
+        this.x = 0; this.y = 0; this.size = 0; this.speedY = 0; this.speedX = 0; this.life = 0; this.decay = 0; this.color = '';
+        this.reset();
+      }
       reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = canvas.height + Math.random() * 50;
+        this.x = Math.random() * canvas!.width;
+        this.y = canvas!.height + Math.random() * 50;
         this.size = Math.random() * 25 + 10;
         this.speedY = Math.random() * 2 + 1;
         this.speedX = (Math.random() - 0.5) * 1.5;
@@ -28,43 +45,57 @@ const BlueFlameBackground = () => {
         if (this.life <= 0) this.reset();
       }
       draw() {
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.beginPath();
-        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+        ctx!.globalCompositeOperation = 'lighter';
+        ctx!.beginPath();
+        const gradient = ctx!.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
         gradient.addColorStop(0, this.color + Math.floor(this.life * 255).toString(16).padStart(2, '0'));
         gradient.addColorStop(1, 'transparent');
-        ctx.fillStyle = gradient;
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx!.fillStyle = gradient;
+        ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx!.fill();
       }
     }
-    const init = () => { particles = []; for (let i = 0; i < 80; i++) particles.push(new FlameParticle()); };
+
+    const init = () => {
+      particles = [];
+      for (let i = 0; i < 80; i++) particles.push(new FlameParticle());
+    };
+
     const animateFlames = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => { p.update(); p.draw(); });
       animationFrameId = requestAnimationFrame(animateFlames);
     };
+
     window.addEventListener('resize', resize);
     resize(); init(); animateFlames();
-    return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(animationFrameId); };
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
+
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-40" style={{ zIndex: 0 }} />;
 };
 
 // --- 2. COMPONENTS ---
-const RollingNumber = ({ value, suffix = "" }) => {
-  const ref = useRef(null);
+const RollingNumber = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
   useEffect(() => {
     if (isInView && ref.current) {
-      const controls = animate(0, value, { duration: 2, ease: "easeOut", onUpdate: (latest) => { if (ref.current) ref.current.textContent = Math.floor(latest) + suffix; } });
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: "easeOut",
+        onUpdate: (latest) => { if (ref.current) ref.current.textContent = Math.floor(latest) + suffix; }
+      });
       return () => controls.stop();
     }
   }, [isInView, value, suffix]);
   return <span ref={ref}>0</span>;
 };
 
-const SkillBar = ({ name, level }) => (
+const SkillBar = ({ name, level }: { name: string; level: number }) => (
   <div className="mb-5">
     <div className="flex justify-between text-[10px] font-mono mb-2 uppercase tracking-widest text-white/70">
       <span>{name}</span>
@@ -81,7 +112,7 @@ const SkillBar = ({ name, level }) => (
   </div>
 );
 
-const TimelineItem = ({ year, title, subtitle, desc, align = "left" }) => (
+const TimelineItem = ({ year, title, subtitle, desc, align = "left" }: any) => (
   <div className={`flex w-full mb-12 items-center justify-between ${align === 'right' ? 'flex-row-reverse' : ''}`}>
     <div className="hidden md:block w-[45%]" />
     <div className="relative z-10 flex items-center justify-center w-10">
@@ -96,20 +127,20 @@ const TimelineItem = ({ year, title, subtitle, desc, align = "left" }) => (
   </div>
 );
 
-const ProjectCard = ({ title, desc, tech, link, status }) => (
+const ProjectCard = ({ title, desc, tech, link, status }: any) => (
   <motion.div whileHover={{ y: -10 }} className="bg-black/60 backdrop-blur-xl border border-white/5 p-8 rounded-2xl group relative overflow-hidden flex flex-col min-h-[380px] transition-all duration-500 hover:border-cyan-500/40 z-10">
     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
     <span className={`text-[10px] font-bold uppercase tracking-widest mb-6 ${status === 'Live' ? 'text-cyan-400' : status === 'Completed' ? 'text-green-400' : 'text-purple-400'}`}>{status}</span>
     <h3 className="text-3xl font-black uppercase mb-4 group-hover:text-cyan-400 transition-colors tracking-tighter leading-none">{title}</h3>
     <p className="text-white/50 text-xs font-mono leading-relaxed flex-grow">{desc}</p>
     <div className="flex flex-wrap gap-2 mt-6 mb-8">
-      {tech.map((t, i) => <span key={i} className="text-[9px] border border-white/10 px-3 py-1 rounded-full text-white/40 uppercase bg-white/5">{t}</span>)}
+      {tech.map((t: string, i: number) => <span key={i} className="text-[9px] border border-white/10 px-3 py-1 rounded-full text-white/40 uppercase bg-white/5">{t}</span>)}
     </div>
     {link && <a href={link} target="_blank" rel="noopener noreferrer" className="relative z-50 text-[10px] font-bold text-cyan-400 uppercase tracking-[0.2em] flex items-center gap-2 hover:text-white transition-all w-fit">Launch Demo ↗</a>}
   </motion.div>
 );
 
-const CertCard = ({ org, title, year, isHackathon, fileName }) => (
+const CertCard = ({ org, title, year, isHackathon, fileName }: any) => (
   <motion.div whileHover={{ scale: 1.02 }} className={`bg-black/60 backdrop-blur-xl border ${isHackathon ? 'border-purple-500/30' : 'border-white/5'} p-6 rounded-xl group flex flex-col h-full relative overflow-hidden transition-all z-10`}>
     <h4 className={`text-[10px] font-bold uppercase mb-2 tracking-widest ${isHackathon ? 'text-purple-400' : 'text-cyan-400'}`}>{org}</h4>
     <h3 className="text-sm font-bold text-white/90 uppercase leading-snug mb-4 pr-8">{title}</h3>
@@ -129,32 +160,60 @@ export default function Portfolio() {
     let i = 0;
     const interval = setInterval(() => { setBioText(fullBio.slice(0, i)); i++; if (i > fullBio.length) clearInterval(interval); }, 10);
     return () => clearInterval(interval);
-  }, []);
+  }, [fullBio]);
 
   const journeyData = [
-    { year: "2026 - Upcoming", title: "Summer Internship", subtitle: "Looking for Opportunities", desc: "Actively seeking Data Scientist or software engineering internship for Summer 2026." },
-    { year: "2025 - Present", title: "B.Tech in Computer Science", subtitle: "Lovely Professional University , Jalandhar", desc: "Core subjects: Programming, Math, Physics. CGPA: 8.79." },
+    { year: "Jun 2026 - Aug 2026", title: "Summer Internship", subtitle: "Times Of India", desc: "Explored and completed Community Development Project on Critical Thinking in collaboration with TOI." },
+    { year: "2025 - Present", title: "B.Tech in Computer Science", subtitle: "Lovely Professional University , Jalandhar", desc: "Core subjects: Programming, Math, Physics. CGPA: 8.08." },
     { year: "2024 - 2025", title: "Senior Secondary (12th)", subtitle: "KV,ARC,Charbatia,Cuttack,Odisha", desc: "PCM Stream. Explored interest in programming." },
     { year: "2022 - 2023", title: "Class 10th", subtitle: "KV,ARC,Charbatia,Cuttack,Odisha", desc: "Engaged in many projects and programs." }
   ];
 
   const projects = [
-    { title: "Cosmic Tic-Tac-Toe", desc: "Space-themed strategy game with framer-motion transitions.", tech: ["React", "Vite", "Framer"], link: "https://tic-tac-toe-eight-navy-77.vercel.app/", status: "Live" },
-    { title: "Calculux", desc: "Modern scientific calculator with high-precision logic.", tech: ["HTML", "CSS", "JS"], link: "https://working-scientific-calc-i47e.vercel.app/", status: "Live" },
-    { title: "StudyPilot AI", desc: "AI study companion that analyzes learning patterns.", tech: ["Next.js", "Python", "OpenAI"], status: "Completed" },
-    { title: "FinSage", desc: "Automated financial ecosystem for expense tracking.", tech: ["Next.js", "Supabase", "Tailwind"], status: "In Development" },
-    { title: "UniPath AI", desc: "ML-driven career mapping platform that analyzes skill gaps.", tech: ["Flask", "SQLAlchemy", "Scikit"], status: "In Development" }
-  ];
+  {
+    title: "Cosmic Tic-Tac-Toe",
+    desc: "Problem: Traditional Tic-Tac-Toe can feel repetitive and visually plain. Result: Built an interactive space-themed Tic-Tac-Toe game with animated transitions and an engaging interface. Learning: Improved my understanding of React components, state management and animation-driven UI design.",
+    tech: ["React", "Vite", "Framer"],
+    link: "https://tic-tac-toe-eight-navy-77.vercel.app/",
+    status: "Live"
+  },
+  {
+    title: "Calculux",
+    desc: "Problem: Basic calculators often lack advanced scientific functions and a modern user experience. Result: Developed a scientific calculator with high-precision calculations and an intuitive interface. Learning: Strengthened my understanding of JavaScript logic, mathematical operations and responsive web design.",
+    tech: ["HTML", "CSS", "JS"],
+    link: "https://working-scientific-calc-i47e.vercel.app/",
+    status: "Live"
+  },
+  {
+    title: "StudyPilot AI",
+    desc: "Problem: Students often struggle to understand their learning patterns and study effectively. Result: Built an AI-powered study companion that analyzes learning patterns and provides personalized assistance. Learning: Gained experience in AI integration, full-stack development and building intelligent user-focused applications.",
+    tech: ["Next.js", "Python", "OpenAI"],
+    status: "Completed"
+  },
+  {
+    title: "FinSage",
+    desc: "Problem: Managing and understanding personal expenses can be difficult when financial data is scattered and unstructured. Result: Developed a financial tracking application that organizes expenses and transforms financial data into useful insights. Learning: Improved my skills in data processing, database management and building practical data-driven applications.",
+    tech: ["Python", "SQLite", "Streamlit"],
+    link: "https://finsage-26.streamlit.app/",
+    status: "Live"
+  },
+  {
+    title: "AutoInsight",
+    desc: "Problem: Extracting meaningful insights from raw datasets can be time-consuming and technically challenging. Result: Built an AI-powered analytics platform that automatically identifies key insights, trends and actionable findings from data. Learning: Strengthened my understanding of automated data analysis, machine learning workflows and interactive analytics applications.",
+    tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Streamlit"],
+    status: "In Development"
+  }
+];
 
   const arsenalSkills = [
     { name: "Python", level: 90 },
     { name: "React.js / Next.js", level: 85 },
     { name: "SQL", level: 80 },
-    { name: "Machine Learning", level: 25 },
+    { name: "Machine Learning", level: 45 },
     { name: "Tailwind CSS", level: 95 },
     { name: "C Programming", level: 70 },
     { name: "JavaScript", level: 80 },
-    { name: "Java", level: 0 },
+    { name: "Java", level: 35 },
     { name: "HTML", level: 85 }
   ];
 
@@ -174,7 +233,7 @@ export default function Portfolio() {
             <h1 className="text-6xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-[0.8] uppercase">AASHISH<br/><span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.43)' }}>KUMAR</span></h1>
           </div>
           <div className="flex gap-16 border-l border-white/5 pl-8">
-            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={50} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
+            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={75} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-purple-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Projects</p></div>
             <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Certs</p></div>
           </div>
@@ -239,11 +298,13 @@ export default function Portfolio() {
               <CertCard org="Infosys" title="Cyber Security Essentials" year="2026" isHackathon={false} fileName="infosys_springboard.pdf" />
               <CertCard org="upGrad" title="Advanced Power BI" year="2025" isHackathon={false} fileName="PowerBI.pdf" />
               <CertCard org="Publicis Sapient" title="JavaScript Essentials" year="2025" isHackathon={false} fileName="JS.pdf" />
+              <CertCard org="IBM" title="Agentic AI and AI Tools" year="2026" isHackathon={false} fileName="Agentic_AI.pdf" />
+              <CertCard org="Google" title="AI Fundamentals" year="2026" isHackathon={false} fileName="AI_fundamentals.pdf" />
             </div>
           </div>
         </section>
 
-        {/* FOOTER - FIXED MAIL REDIRECT */}
+        {/* FOOTER */}
         <footer className="pt-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center font-mono text-[10px] uppercase tracking-widest text-white/40 gap-8">
            <div className="text-center md:text-left">
              <p className="text-cyan-400 font-bold mb-2 text-2xl tracking-tighter uppercase">Let's Connect</p>
