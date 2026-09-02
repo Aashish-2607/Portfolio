@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { motion, useInView, animate } from 'framer-motion';
 
 // --- 1. REALISTIC BLUE FLAME ENGINE ---
@@ -173,7 +174,7 @@ export default function Portfolio() {
     year: "2025 - Present",
     title: "B.Tech in Computer Science",
     subtitle: "Lovely Professional University , Jalandhar",
-    desc: "Core subjects: Programming, Math, Physics. CGPA: 8.08."
+    desc: "Core subjects: Programming, Math, Physics. CGPA: 8.38."
   },
   {
     year: "2024 - 2025",
@@ -247,18 +248,92 @@ export default function Portfolio() {
       <div className="max-w-7xl mx-auto px-6 space-y-60 relative z-10">
         
         {/* HERO SECTION */}
-        <section className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-16 mt-20">
-          <div>
-            <span className="text-cyan-400 font-mono text-xs tracking-[0.5em] mb-6 block uppercase font-bold">// SYSTEM_READY: 2607</span>
-            <h1 className="text-6xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-[0.8] uppercase">AASHISH<br/><span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.43)' }}>KUMAR</span></h1>
-          </div>
-          <div className="flex gap-16 border-l border-white/5 pl-8">
-            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={75} suffix="+" /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Commits</p></div>
-            <div className="text-right"><h2 className="text-4xl md:text-6xl text-purple-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Projects</p></div>
-            <div className="text-right"><h2 className="text-4xl md:text-6xl text-cyan-400 italic font-black"><RollingNumber value={4} /></h2><p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">Certs</p></div>
-          </div>
-        </section>
+        <section className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 mt-20 items-center">
 
+          {/* NAME */}
+          <div>
+            <span className="text-cyan-400 font-mono text-xs tracking-[0.5em] mb-6 block uppercase font-bold">
+              // SYSTEM_READY: 2607
+            </span>
+
+            <h1 className="text-6xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-[0.8] uppercase">
+              AASHISH
+              <br />
+              <span
+                className="text-transparent"
+                style={{
+                  WebkitTextStroke: '1px rgba(255, 255, 255, 0.43)'
+                }}
+              >
+                KUMAR
+              </span>
+            </h1>
+          </div>
+
+          {/* PHOTO + STATS */}
+          <div className="flex flex-col items-center lg:items-end gap-10">
+
+            {/* PROFILE PHOTO */}
+            <div className="relative group">
+
+              {/* Cyan glow */}
+              <div className="absolute -inset-4 rounded-full bg-cyan-400/20 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Photo */}
+              <div className="relative w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border border-cyan-400/40 shadow-[0_0_40px_rgba(34,211,238,0.25)]">
+                <Image
+                  src="/formal.png"
+                  alt="Aashish Kumar"
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </div>
+
+      {/* Small status badge */}
+      <div className="absolute bottom-2 right-2 bg-[#020205]/90 border border-cyan-400/40 px-4 py-2 rounded-full">
+        <span className="text-[9px] text-cyan-400 font-mono tracking-widest uppercase">
+          ONLINE
+        </span>
+      </div>
+
+    </div>
+
+    {/* STATS */}
+    <div className="flex gap-10 md:gap-16 border-l border-white/5 pl-6 md:pl-8">
+
+      <div className="text-right">
+        <h2 className="text-3xl md:text-5xl text-cyan-400 italic font-black">
+          <RollingNumber value={75} suffix="+" />
+        </h2>
+        <p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">
+          Commits
+        </p>
+      </div>
+
+      <div className="text-right">
+        <h2 className="text-3xl md:text-5xl text-purple-400 italic font-black">
+          <RollingNumber value={5} />
+        </h2>
+        <p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">
+          Projects
+        </p>
+      </div>
+
+      <div className="text-right">
+        <h2 className="text-3xl md:text-5xl text-cyan-400 italic font-black">
+          <RollingNumber value={6} />
+        </h2>
+        <p className="text-[9px] text-white/30 tracking-widest uppercase mt-2">
+          Certs
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
         {/* ABOUT ME & TECHNICAL ARSENAL */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
           <div className="space-y-12">
@@ -324,17 +399,167 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* FOOTER */}
-        <footer className="pt-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center font-mono text-[10px] uppercase tracking-widest text-white/40 gap-8">
-           <div className="text-center md:text-left">
-             <p className="text-cyan-400 font-bold mb-2 text-2xl tracking-tighter uppercase">Let's Connect</p>
-             <p>LPU CSE | 2025-2029 | <a href="mailto:info.aashish26@gmail.com" className="text-white hover:text-cyan-400 transition-colors">info.aashish26@gmail.com</a></p>
-           </div>
-           <div className="flex gap-8">
-             <a href="https://github.com/Aashish-2607" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors z-50">GITHUB</a>
-             <a href="https://linkedin.com/in/aashish-kumar-sahoo-631361346/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors z-50">LINKEDIN</a>
-             <a href="mailto:info.aashish26@gmail.com" className="hover:text-cyan-400 transition-colors z-50">MAIL</a>
-           </div>
+        {/* FOOTER / LET'S CONNECT */}
+        <footer className="pt-24 border-t border-white/5">
+
+          <div className="max-w-4xl mx-auto">
+
+            {/* CONTACT CARD */}
+            <div className="relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-xl">
+
+              {/* Glow */}
+              <div className="absolute -top-32 -right-32 w-64 h-64 bg-cyan-400/10 blur-[100px] pointer-events-none" />
+              <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-purple-500/10 blur-[100px] pointer-events-none" />
+
+              <div className="relative z-10">
+
+                {/* Heading */}
+                <div className="mb-10">
+                  <p className="text-cyan-400 font-mono text-[10px] tracking-[0.4em] uppercase mb-4">
+                    // OPEN_CHANNEL
+                  </p>
+
+                  <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter">
+                    Let's <span className="text-cyan-400">Connect</span>
+                  </h2>
+
+                  <p className="text-white/40 font-mono text-xs md:text-sm mt-5 max-w-xl leading-relaxed">
+                    Have a project, opportunity, collaboration idea, or just want to say hello?
+                    Feel free to reach out.
+                  </p>
+                </div>
+
+                {/* EMAIL BUTTON */}
+                <a
+                  href="mailto:info.aashish26@gmail.com"
+                  className="relative z-50 group flex flex-col md:flex-row md:items-center md:justify-between gap-4 border border-cyan-400/20 bg-cyan-400/[0.03] rounded-2xl p-6 md:p-7 hover:border-cyan-400/60 hover:bg-cyan-400/[0.07] transition-all duration-300 cursor-pointer"
+                >
+
+                  <div className="flex items-center gap-5">
+
+                    <div className="w-12 h-12 rounded-xl border border-cyan-400/30
+                      flex items-center justify-center
+                      text-cyan-400 text-xl
+                      group-hover:bg-cyan-400 group-hover:text-black
+                      transition-all duration-300">
+                      ✉
+                    </div>
+
+                    <div>
+                      <p className="text-[9px] text-white/30 font-mono tracking-widest uppercase mb-1">
+                        Direct Email
+                      </p>
+
+                      <p className="text-sm md:text-base text-white font-mono">
+                        info.aashish26@gmail.com
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-cyan-400 group-hover:text-white transition-colors">
+                    Send Mail ↗
+                  </span>
+
+                </a>
+
+                {/* SOCIAL LINKS */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+                  {/* GITHUB */}
+                  <a
+                    href="https://github.com/Aashish-2607"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group border border-white/10 bg-white/[0.02]
+                    rounded-2xl p-5
+                    hover:border-white/30 hover:bg-white/[0.05]
+                    transition-all duration-300"
+                  >
+
+                    <div className="flex items-center justify-between">
+
+                      <div>
+                        <p className="text-[9px] text-white/30 font-mono tracking-widest uppercase mb-2">
+                          Code Repository
+                        </p>
+
+                        <p className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">
+                          GitHub
+                        </p>
+
+                        <p className="text-[10px] text-white/40 font-mono mt-1">
+                          github.com/Aashish-2607
+                        </p>
+                      </div>
+
+                      <span className="text-white/30 group-hover:text-cyan-400 text-xl transition-colors">
+                        ↗
+                      </span>
+
+                    </div>
+
+                  </a>
+
+                  {/* LINKEDIN */}
+                  <a
+                    href="https://linkedin.com/in/aashish-kumar-sahoo-631361346/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group border border-white/10 bg-white/[0.02]
+                    rounded-2xl p-5
+                    hover:border-white/30 hover:bg-white/[0.05]
+                    transition-all duration-300"
+                  >
+
+                    <div className="flex items-center justify-between">
+
+                      <div>
+                        <p className="text-[9px] text-white/30 font-mono tracking-widest uppercase mb-2">
+                          Professional Network
+                        </p>
+
+                        <p className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">
+                          LinkedIn
+                        </p>
+
+                        <p className="text-[10px] text-white/40 font-mono mt-1">
+                          linkedin.com/in/aashish-kumar-sahoo
+                        </p>
+                      </div>
+
+                      <span className="text-white/30 group-hover:text-cyan-400 text-xl transition-colors">
+                        ↗
+                      </span>
+
+                    </div>
+
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+
+            {/* BOTTOM INFO */}
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-8 text-[9px] font-mono uppercase tracking-widest text-white/30">
+
+              <p>
+                LPU CSE | 2025-2029
+              </p>
+
+              <p>
+                © 2026 Aashish Kumar
+              </p>
+
+              <p className="text-cyan-400/60">
+                System Online ●
+              </p>
+
+            </div>
+
+          </div>
+
         </footer>
       </div>
     </div>
